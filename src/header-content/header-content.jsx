@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
+import socketIOClient from 'socket.io-client'
 
 class HeaderContent extends React.Component {
   constructor(props) {
@@ -21,7 +22,9 @@ class HeaderContent extends React.Component {
     this.dropdownToggle = this.dropdownToggle.bind(this);
     this.state = {
       isOpen: false,
-      dropdownOpen: false
+      dropdownOpen: false,
+      notificationList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      endpoint: "http://127.0.0.1:8000"
     };
   }
   toggle() {
@@ -30,12 +33,25 @@ class HeaderContent extends React.Component {
     });
   }
 
-  dropdownToggle(){
+  dropdownToggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+
+  generateItems(){
+    let items = [];         
+     for (let i = 0; i <= 10; i++) {             
+          items.push(<DropdownItem>{i}</DropdownItem>);
+     }
+     return items;
+  }
   render() {
+    const socket = socketIOClient(this.state.endpoint);
+    socket.on('time', (timer) => {
+      // setting the color of our button
+      console.log(timer +" <<< got time ");
+    })
     return (
       <Navbar color="inverse" light expand="md">
         <NavbarBrand href="/">reactstrap</NavbarBrand>
@@ -46,11 +62,15 @@ class HeaderContent extends React.Component {
               <NavLink href="/components/">Components</NavLink>
             </NavItem>
             <NavItem>
-              <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.dropdownToggle}>
+              <ButtonDropdown
+                isOpen={this.state.dropdownOpen}
+                toggle={this.dropdownToggle}>
                 <DropdownToggle>
-                <FontAwesomeIcon icon={faBell} />
+                  <FontAwesomeIcon icon={faBell} />
+                  (6) notifications
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu right={true}>
+                  {this.generateItems()}
                   <DropdownItem header>Header</DropdownItem>
                   <DropdownItem disabled>Action</DropdownItem>
                   <DropdownItem>Another Action</DropdownItem>
