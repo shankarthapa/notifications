@@ -17,15 +17,26 @@ import socketIOClient from 'socket.io-client'
 class HeaderContent extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
     this.state = {
       isOpen: false,
       dropdownOpen: false,
-      notificationList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      notificationList: [],
       endpoint: "http://127.0.0.1:8000"
     };
+    const socket = socketIOClient(this.state.endpoint);
+    socket.on('time', (timer) => {
+      // setting the color of our button
+      console.log(timer + " <<< got time ");
+      //this.state.notificationList.push({});
+
+      this.setState({
+        notificationList: [...this.state.notificationList, {}]
+      });
+    })
+
+
   }
   toggle() {
     this.setState({
@@ -39,19 +50,16 @@ class HeaderContent extends React.Component {
     });
   }
 
-  generateItems(){
-    let items = [];         
-     for (let i = 0; i <= 10; i++) {             
-          items.push(<DropdownItem>{i}</DropdownItem>);
-     }
-     return items;
+  generateItems() {
+    var items = [];
+    for (let i = 0; i < this.state.notificationList.length; i++) {
+      items.push(<DropdownItem key={i} value={i}>{i}</DropdownItem>);
+    }
+    return items;
   }
   render() {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.on('time', (timer) => {
-      // setting the color of our button
-      console.log(timer +" <<< got time ");
-    })
+    
+    
     return (
       <Navbar color="inverse" light expand="md">
         <NavbarBrand href="/">reactstrap</NavbarBrand>
@@ -67,15 +75,15 @@ class HeaderContent extends React.Component {
                 toggle={this.dropdownToggle}>
                 <DropdownToggle>
                   <FontAwesomeIcon icon={faBell} />
-                  (6) notifications
+                  ( {this.state.notificationList.length} ) notifications
                 </DropdownToggle>
                 <DropdownMenu right={true}>
                   {this.generateItems()}
-                  <DropdownItem header>Header</DropdownItem>
+                  {/* <DropdownItem header>Header</DropdownItem>
                   <DropdownItem disabled>Action</DropdownItem>
                   <DropdownItem>Another Action</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>Another Action</DropdownItem>
+                  <DropdownItem>Another Action</DropdownItem> */}
                 </DropdownMenu>
               </ButtonDropdown>
             </NavItem>
