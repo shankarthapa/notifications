@@ -13,11 +13,13 @@ class App extends Component {
   componentDidMount() {
     console.log("getting in componentDidMount");
   }
+
   render() {
-    console.log('called here');
+
     return (
       <div className="App">
         <HeaderContent />
+
         <BodyContent />
       </div>
     );

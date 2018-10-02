@@ -1,34 +1,20 @@
 import React from 'react'
-import styles from './body-content.css'
 import {
   Container,
   Row,
   Col,
-  Jumbotron,
-  Button
+  Jumbotron
 } from 'reactstrap';
+
 class BodyContent extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+
   render() {
     return (
       <Jumbotron>
         <Container>
           <Row>
             <Col>
-              <h1>Welcome to React</h1>
-              <p>
-                <Button
-                  tag="a"
-                  color="success"
-                  size="large"
-                  href="http://reactstrap.github.io"
-                  target="_blank"
-                >
-                  View Reactstrap Docs
-                                    </Button>
-              </p>
+              <h1>This is Sample Notification with Reactjs & Admin Angular & NodeJs As BackEnd</h1>
             </Col>
           </Row>
         </Container>
