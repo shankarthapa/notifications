@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+  <div class="jumbotron container-box">
+
+    <h1>Send Notifications</h1>
+    <small class="spacer">Enter some text to send Notifications</small>
+    <textarea #msg rows="4" cols="50" class="spacer">
+
+
+
+    </textarea>
+    <button (click)="onClickSend()" type="button" class="btn btn-primary spacer">send</button>
+    <div class="alert" [ngClass]="{'alert-danger': (isValid === 0), 'alert-success': (isValid === 1)}">
+      <strong>{{ validationMsg }}</strong>
+    </div>
+
+  </div>
+
+
+</div>
