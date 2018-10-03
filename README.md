@@ -30,5 +30,8 @@ https://www.npmjs.com/package/nodemon
 3. `cd ./server/ next> node index.js or nodemon index.js` to start node server
 4. once all up & running start pushing contents from Admin section & view in Reactjs section.
 
-## screens
+## screen admin section
 ![Admin Section](Snip20181003_2.png)
+
+## screen react section
+![Admin Section](Snip20181003_3.png)
