@@ -23,6 +23,11 @@ export class AppComponent {
     this.socket.on('notifications', (msg) => {
       console.log('got msg ' + msg.msg);
     });
+
+    this.socket.on('errorMsg', (msg) => {
+      this.isValid = 0;
+      this.validationMsg = msg.message;
+    });
   }
 
   onClickSend() {
