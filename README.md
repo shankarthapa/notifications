@@ -30,6 +30,10 @@ https://www.npmjs.com/package/nodemon
 3. `cd ./server/ next> node index.js or nodemon index.js` to start node server
 4. once all up & running start pushing contents from Admin section & view in Reactjs section.
 
+## MONGO FB
+mongo DB is used from `https://mlab.com/`
+So no configuration is needed.
+
 ## screen admin section
 ![Admin Section](Snip20181003_2.png)
 
